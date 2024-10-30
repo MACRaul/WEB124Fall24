@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Ambiance Kit</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://fav.farm/✅">
+</head>
+<body>
+
+<h2>Create your own ambiance experience!</h2> <!--Added header for clarity-->
+
+  <div class="keys">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">big waves</span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">waterfall</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">birds</span>
+    </div>
+     <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">calm waves</span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">fountain</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">ducks</span>
+    </div>
+    <!--Changed the lables and audio files linked to the buttons, removed extra buttons-->
+  </div>
+
+  <p>Press key again to stop/start audio track.</p> <!--user instructions-->
+
+  <!--provided new path for new audio files. Source BurghRecords https://www.edinburghrecords.com/product/sounds-of-crete/ -->
+  <audio data-key="65" src="Audio/SEA_WAVES(1).wav"></audio>
+  <audio data-key="83" src="Audio/WATERFALL.wav"></audio>
+  <audio data-key="68" src="Audio/NATURE_BIRDS(2).wav"></audio>
+  <audio data-key="70" src="Audio/SEA_WAVES(2).wav"></audio>
+  <audio data-key="71" src="Audio/WATER_SPLASH.wav"></audio>
+  <audio data-key="72" src="Audio/DUCKS.wav"></audio>
+
+
+<script>
+  let isPlaying = {}; // Used to keep track of playing states
+
+  function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');
+  }
+
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio) return;
+
+   /* Adding an if statement to execute dependig on state of audio file (playing or not playing) */
+    if (!isPlaying[e.keyCode]) {
+    key.classList.add('playing');
+    audio.currentTime = 0; // Rewind to start
+    audio.play();
+    isPlaying[e.keyCode] = true; // Mark as playing
+  } else {
+    key.classList.remove('playing');
+    audio.pause(); // Pause the audio
+    isPlaying[e.keyCode] = false; // Mark as not playing
+  }
+  }
+
+
+  const keys = Array.from(document.querySelectorAll('.key'));
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
+</script>
+
+
+</body>
+</html>
+<!--The if statement to control the audio states was a bit of a challenege to get right until I added a variable to keep track of states so that 
+they can be more easily handled.-->
