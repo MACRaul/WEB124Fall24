@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Final Project</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>JavaScript Calculator</h1>
+
+        <label for="num">Enter a number:</label>
+        <input type="number" id="num">
+        <button id="calculateBtn">Calculate!</button>
+
+        <p id="addition">addition</p>
+        <p id="subtraction">subtraction</p>
+        <p id="multiplication">multiplication</p>
+        <p id="division">division</p>
+    </div>
+
+    <script>
+        // Function to perform addition (1 through 10 added to user input)
+        function performAddition(userInput) {
+            let additionResult = '';
+            for (let i = 1; i <= 10; i++) {
+                
+            }
+            document.getElementById('addition').textContent = "Addition: " + additionResult;
+        }
+
+        // Function to perform subtraction (1 through 10 subtracted from user input)
+        function performSubtraction(userInput) {
+            let subtractionResult = '';
+            let i = 1;
+            while (i <= 10) {
+                subtractionResult += (userInput - i) + ' ';
+                i++;
+            }
+            document.getElementById('subtraction').textContent = "Subtraction: " + subtractionResult;
+        }
+
+        // Function to perform multiplication (user input multiplied by 1 through 10)
+        function performMultiplication(userInput) {
+            let multiplicationResult = '';
+            let j = 1;
+            do {
+                multiplicationResult += (userInput * j) + ' ';
+                j++;
+            } while (j <= 10);
+            document.getElementById('multiplication').textContent = "Multiplication: " + multiplicationResult;
+        }
+
+        // Function to perform division (user input divided by 1 through 10)
+        function performDivision(userInput) {
+            let divisionResult = '';
+            for (let k = 1; k <= 10; k++) {
+                divisionResult += (userInput / k).toFixed(2) + ' ';  // Use .toFixed(2) for 2 decimal places
+            }
+            document.getElementById('division').textContent = "Division: " + divisionResult;
+        }
+
+        // Main function that gets the input and calls the operation functions
+        function performOperations() {
+            const userInput = parseInt(document.getElementById('num').value);
+
+            // Call each operation function
+            performAddition(userInput);
+            performSubtraction(userInput);
+            performMultiplication(userInput);
+            performDivision(userInput);
+        }
+        //document.getElementById('calculateBtn').addEventListener('click', performOperations);
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            console.log("Button clicked");  // Debugging step
+            performOperations();})
+    
+
+    </script>
+</body>
+</html>

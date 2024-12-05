@@ -1,0 +1,91 @@
+<!--Raul Morales Alacazar Final Project 12/05/2024-->
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Final Project</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>JavaScript Calculator</h1>
+        
+        <label for="num">Enter a number:</label>
+        <input type="number" id="num">
+        <button id="calculateBtn">Calculate!</button>
+        
+        <p id="addition">Addition</p>
+        <p id="subtraction">Subtraction</p>
+        <p id="multiplication">Multiplication</p>
+        <p id="division">Division</p>
+    </div>
+
+    <script>
+        // perform addition 
+        function performAddition(userNum) {
+            let additionResult = '';
+            for (let i = 1; i <= 10; i++) {
+                let result = userNum + i;
+                additionResult += `${i} + ${userNum} = ${result}<br>`;   
+            }
+            document.getElementById('addition').innerHTML = "Addition:<br>" + additionResult;   // to render <br>
+        }
+
+        // perform subtraction 
+        function performSubtraction(userNum) {
+            let subtractionResult = '';
+            for (let i = 1; i <= 10; i++) {
+                let result = userNum - i;
+                subtractionResult += `${i} - ${userNum} = ${result}<br>`;   
+            }
+            document.getElementById('subtraction').innerHTML = "Subtraction:<br>" + subtractionResult;   
+        }
+
+        
+        function performMultiplication(userNum) {
+            let multiplicationResult = '';
+            for (let i = 1; i <= 10; i++) {
+                let result = userNum * i;
+                multiplicationResult += `${i} * ${userNum} = ${result}<br>`;   
+            }
+            document.getElementById('multiplication').innerHTML = "Multiplication:<br>" + multiplicationResult;   
+        }
+
+        // perform division 
+        function performDivision(userNum) {
+            let divisionResult = '';
+            for (let i = 1; i <= 10; i++) {
+                let result = (userNum / i).toFixed(2); // Using .toFixed(2) for 2 decimal places
+                divisionResult += `${userNum} / ${i} = ${result}<br>`;   
+            }
+            document.getElementById('division').innerHTML = "Division:<br>" + divisionResult;   
+        }
+
+        // Main function 
+        function performOperations() {
+            const userNum = parseInt(document.getElementById('num').value);
+
+            // Check if the input is a valid number
+            if (isNaN(userNum)) {
+                alert("Please enter a valid number.");
+                return;
+            }
+
+            // Call each operation
+            performAddition(userNum);
+            performSubtraction(userNum);
+            performMultiplication(userNum);
+            performDivision(userNum);
+        }
+
+        //Event listener
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            performOperations();
+        });
+    </script>
+</body>
+</html>
+
